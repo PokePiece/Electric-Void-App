@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Electron with C++ Module</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        .result {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Electron + C++ Demo</h1>
+
+    <h2>Addition</h2>
+    <input type="number" id="num1" value="5" />
+    +
+    <input type="number" id="num2" value="3" />
+    <button id="addBtn">Calculate</button>
+    <div id="addResult" class="result"></div>
+
+    <h2>Factorial</h2>
+    <input type="number" id="factNum" value="5" />
+    <button id="factBtn">Calculate Factorial</button>
+    <div id="factResult" class="result"></div>
+
+    <script>
+        console.log('Renderer process starting...');
+        console.log('window.nativeAddon:', window.nativeAddon);
+        console.log('typeof window.nativeAddon:', typeof window.nativeAddon);
+
+        if (window.nativeAddon) {
+            console.log('nativeAddon is available');
+            console.log('add method:', window.nativeAddon.add);
+            console.log('factorial method:', window.nativeAddon.factorial);
+        } else {
+            console.log('nativeAddon is NOT available');
+        }
+
+        document.getElementById('addBtn').addEventListener('click', () => {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+
+            try {
+                const result = window.nativeAddon.add(num1, num2);
+                document.getElementById('addResult').textContent = `Result: ${result}`;
+            } catch (error) {
+                document.getElementById('addResult').textContent = `Error: ${error.message}`;
+            }
+        });
+
+        document.getElementById('factBtn').addEventListener('click', () => {
+            const num = parseInt(document.getElementById('factNum').value);
+
+            try {
+                const result = window.nativeAddon.factorial(num);
+                document.getElementById('factResult').textContent = `${num}! = ${result}`;
+            } catch (error) {
+                document.getElementById('factResult').textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+/.next
+/bin
+/build
+/dist
+/node_modules
+/release
+venv/
+__pycache__/
+chroma_db/
+D3D12/
+MMO-Wide-World_Data/
+MonoBleedingEdge/
+UnityPlayer.dll
+UnityCrashHandler64.exe

@@ -1,0 +1,38 @@
+from optimum.exporters.onnx import main_export
+
+# Call main_export with the correct argument name
+main_export(
+    model_name_or_path="fine_tuned_model",  # <-- this is the fix
+    output="exported_model",
+    task="text-generation",
+    opset=17,
+    device="cpu",
+    fp16=False,
+    optimize=None,
+    monolith=False,
+    no_post_process=False,
+    variant=None,
+    framework="pt",
+    atol=None,
+    cache_dir=None,
+    trust_remote_code=True,
+    pad_token_id=0,
+    library_name="transformers",
+    model_kwargs=None,
+    legacy=False,
+    no_dynamic_axes=False,
+    no_constant_fold=False,
+    slim=False,
+    batch_size=1,
+    sequence_length=64,
+    num_choices=None,
+    width=None,
+    height=None,
+    num_channels=None,
+    feature_size=None,
+    nb_max_frames=None,
+    audio_sequence_length=None,
+    point_batch_size=None,
+    nb_points_per_image=None,
+    visual_seq_length=None,
+)
